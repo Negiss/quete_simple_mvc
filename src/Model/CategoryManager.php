@@ -1,24 +1,28 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: wilder
+ * Date: 03/10/18
+ * Time: 17:05
+ */
 
 namespace Model;
 
-// src/Model/ItemManager.php
 require __DIR__ . '/../../app/db.php';
 
-class ItemManager
+class CategoryManager
 {
-// récupération de tous les items
-    function selectAllItems()
+    function selectAllCategories()
     {
         $pdo = new \PDO(DSN, USER, PASS);
-        $query = "SELECT * FROM item";
+        $query = "SELECT * FROM category";
         $res = $pdo->query($query);
         return $res->fetchAll();
     }
 
-    function selectOneItem(int $id) {
+    function selectOneCategory(int $id) {
         $pdo = new \PDO(DSN, USER, PASS);
-        $query = "SELECT * FROM item WHERE id = :id";
+        $query = "SELECT * FROM category WHERE id = :id";
         $statement = $pdo->prepare($query);
         $statement->bindValue(':id', $id, \PDO::PARAM_INT);
         $statement->execute();
