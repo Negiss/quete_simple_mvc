@@ -1,0 +1,15 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}MVC 4{% endblock %}
+{% block content %}
+    <section>
+    <h1>Categories</h1>
+    <ul>
+        {% for category in category %}
+            <li>{{ category.name }}</li>
+        {% endfor %}
+    </ul>
+    </section>
+{% endblock %}
+
+{% block javascript %}{% endblock %}
