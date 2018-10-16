@@ -1,0 +1,13 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Edit item{% endblock %}
+
+{% block content %}
+
+    <form action="" method="post">
+        <h1>Changer cet item</h1>
+        <input type="text" name="title" value="{{ item.title }}">
+        <button type="submit" name="Submit">Send</button>
+    </form>
+
+{% endblock %}

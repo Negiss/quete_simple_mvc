@@ -8,27 +8,21 @@
 
 namespace Model;
 
-require __DIR__ . '/../../app/db.php';
-
-class CategoryManager
+class CategoryManager extends AbstractManager
 {
-    function selectAllCategories()
+    const TABLE = 'category';
+
+    public function __construct($pdo)
     {
-        $pdo = new \PDO(DSN, USER, PASS);
-        $query = "SELECT * FROM category";
-        $res = $pdo->query($query);
-        return $res->fetchAll();
+        parent::__construct(self::TABLE, $pdo);
     }
 
-    function selectOneCategory(int $id) {
-        $pdo = new \PDO(DSN, USER, PASS);
-        $query = "SELECT * FROM category WHERE id = :id";
-        $statement = $pdo->prepare($query);
-        $statement->bindValue(':id', $id, \PDO::PARAM_INT);
-        $statement->execute();
-        // contrairement à fetchAll(), fetch() ne renvoie qu'un seul résultat
-        return $statement->fetch();
+    public function insert(Item $item): int
+    {
+        $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . " (`name`) VALUES (:name)");
+        $statement->bindValue('name', $category->getName(), \PDO::PARAM_STR);
+        if ($statement->execute()) {
+            return $this->pdo->lastInsertId();
+        }
     }
 }
-
-?>
